@@ -1,11 +1,12 @@
 #include <crc/crc.hpp>
 
-Crc::Crc8::Crc8(std::uint8_t polynomial): polynomial {polynomial} {}
+Crc::Crc8::Crc8(std::uint8_t polynomial, std::uint8_t initial_value):
+        polynomial {polynomial}, initial_value {initial_value} {}
 
 Crc::Crc8::~Crc8() {};
 
 std::uint8_t Crc::Crc8::operator()(const std::uint8_t* first, const std::uint8_t* last) const {
-    std::uint8_t crc = 0;
+    std::uint8_t crc = initial_value;
 
     for (; first != last; first++) {
         crc ^= *first;
