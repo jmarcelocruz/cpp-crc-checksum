@@ -1,14 +1,15 @@
 #include <crc/crc.hpp>
 
 Crc::Crc8::Crc8(std::uint8_t polynomial, std::uint8_t initial_value, std::uint8_t final_xor):
-    Crc8(polynomial, initial_value, final_xor, false) {}
+    Crc8(polynomial, initial_value, final_xor, false, false) {}
 
 Crc::Crc8::Crc8(std::uint8_t polynomial, std::uint8_t initial_value, std::uint8_t final_xor,
-        bool reflect_input):
+        bool reflect_input, bool reflect_output):
         polynomial {polynomial},
         initial_value {initial_value},
         final_xor {final_xor},
-        reflect_input {reflect_input} {}
+        reflect_input {reflect_input},
+        reflect_output {reflect_output} {}
 
 Crc::Crc8::~Crc8() {};
 
@@ -23,7 +24,7 @@ std::uint8_t Crc::Crc8::operator()(const std::uint8_t* first, const std::uint8_t
         }
     }
 
-    return crc ^ final_xor;
+    return (reflect_output ? reverse_byte(crc) : crc) ^ final_xor;
 }
 
 std::uint8_t Crc::Crc8::reverse_byte(std::uint8_t b) const {
