@@ -9,7 +9,7 @@ TEST(Crc8Suite, IsStable) {
 }
 
 TEST(Crc8Suite, ZeroLengthInputReturnsXoredInitialValue) {
-        Crc::Crc8 crc8_0 {0x07, 0, 0};
+    Crc::Crc8 crc8_0 {0x07, 0, 0};
     Crc::Crc8 crc8_1c {0x07, 0x1C, 0};
     Crc::Crc8 crc8_ff {0x07, 0xFF, 0};
     Crc::Crc8 crc8_1c_1c {0x07, 0x1C, 0x1C};
